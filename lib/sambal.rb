@@ -234,7 +234,12 @@ module Sambal
 
     def ask(cmd)
       @i.printf("#{cmd}\n")
-      response = @o.expect(/^smb:.*\\>/,10)[0] rescue nil
+      begin
+        response = @o.expect(/^smb:.*/,10)[0]
+        #response = @o.expect(/^smb:.*\\>/,10)[0]
+      rescue => e
+        response = nil
+      end
       if response.nil?
         $stderr.puts "Failed to do #{cmd}"
         raise Exception.new, "Failed to do #{cmd}"
