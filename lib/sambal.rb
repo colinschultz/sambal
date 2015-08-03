@@ -235,7 +235,7 @@ module Sambal
     def ask(cmd)
       @i.printf("#{cmd}\n")
       begin
-        response = @o.expect(/^smb:.*/,10)[0]
+        response = @o.expect(/^smb:.*/,620)[0]
         #response = @o.expect(/^smb:.*\\>/,10)[0]
       rescue => e
         response = nil
